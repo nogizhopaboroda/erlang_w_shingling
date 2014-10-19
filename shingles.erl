@@ -33,6 +33,7 @@ ngram(List, Length, Accum) ->
     _ -> ngram(tl(List), Length, Accum ++ [Ngram])
   end.
 
+
 genshingle(String, ShingleLength) ->
   genshingle(ngram(String, ShingleLength), ShingleLength, []).
 
