@@ -3,10 +3,10 @@
 -export([similarity/2, similarity/3]).
 
 -define(STOP_WORDS, [
-  "the", "and", "&", "!", ",", ".", "a",
-  "и",
-  "y", "sys", "el"
+  "the", "and", "a", "&", "!", ",", "."
 ]).
+
+-define(SPLIT_SYMBOLS, " &!,.").
 
 -define(SHINGLE_LENGTH, 1).
 
@@ -43,22 +43,11 @@ genshingle([Head|String], ShingleLength, Accum) ->
 
 
 tokenize(String) ->
-  tokenize(String, [], []).
-
-tokenize("", Accum, CurrentWord) -> Accum ++ [CurrentWord];
-tokenize([Letter|String], Accum, CurrentWord) ->
-  case <<Letter>> of
-    <<" ">> -> tokenize(String, Accum ++ [CurrentWord], []);
-    _ -> tokenize(String, Accum, CurrentWord ++ [Letter])
-  end.
+  string:tokens(String, ?SPLIT_SYMBOLS).
 
 
 canonize(WordsList) ->
-  lists:filter(
-    fun(Word) ->
-      lists:member(Word, ?STOP_WORDS) == false
-    end, WordsList
-  ).
+  WordsList -- ?STOP_WORDS.
 
 
 compare(Source1, Source2) ->
