@@ -39,7 +39,8 @@ genshingle(String, ShingleLength) ->
 
 genshingle([], _, Accum) -> Accum;
 genshingle([Head|String], ShingleLength, Accum) ->
-  genshingle(String, ShingleLength, Accum ++ [erlang:crc32([Head])]).
+  Hash = erlang:crc32(unicode:characters_to_binary(Head,utf8,utf8)),
+  genshingle(String, ShingleLength, Accum ++ [Hash]).
 
 
 tokenize(String) ->
