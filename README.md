@@ -19,3 +19,7 @@ W-shingling algorithm realization in erlang.
   ```
   Same as previous, but with default shingle length.
   
+
+
+[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/nogizhopaboroda/erlang_w_shingling/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
+
